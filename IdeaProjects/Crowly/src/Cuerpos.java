@@ -1,7 +1,14 @@
 import java.util.Date;
+import java.util.UUID;
 
 class Cuerpos {
-    Date Time;
-    int x, y;
-    String Id;
+    private Date Time;
+    private int x, y;
+    private UUID Id;
+
+    public Cuerpos(int pX, int pY, Date videoTime)
+    {
+
+
+    }
 }
