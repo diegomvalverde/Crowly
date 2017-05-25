@@ -6,8 +6,7 @@ class Cuerpos {
     private int x, y;
     private UUID Id;
 
-    public Cuerpos(int pX, int pY, Date videoTime)
-    {
+    public Cuerpos(int pX, int pY, Date videoTime) {
 
 
     }

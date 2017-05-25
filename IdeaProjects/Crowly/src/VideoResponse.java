@@ -6,8 +6,7 @@ public class VideoResponse {
     private String VideoKey;
     private boolean Procesado;
 
-    public VideoResponse(String pUrl, String Key)
-    {
+    public VideoResponse(String pUrl, String Key) {
         VideoRespoinseUrl
     }
 }

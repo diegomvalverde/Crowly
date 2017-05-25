@@ -2,18 +2,15 @@ import java.util.ArrayList;
 
 public class ChartManager {
 
-    void generar(String TipoGrafico, ArrayList<Cuerpos> pCuerpos)
-    {
+    void generar(String TipoGrafico, ArrayList<Cuerpos> pCuerpos) {
 
     }
 
-    private void CrearArregloGrafico(String pContenido)
-    {
+    private void CrearArregloGrafico(String pContenido) {
 
     }
 
-    void browser(String pFile)
-    {
+    void browser(String pFile) {
 
     }
 }
