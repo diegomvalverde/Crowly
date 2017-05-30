@@ -49,33 +49,26 @@ public class MSClient implements IConstants {
         JSONParser parser = new JSONParser();
         try
         {
-            Object obj = parser.parse(videoResponse.getContent());
-
-            JSONObject jsonObject = (JSONObject) obj;
-//            System.out.println(jsonObject);
-
-            // loop array
-            String msg = (String) jsonObject.get("processingResult");
-            obj = parser.parse(msg);
-            jsonObject = (JSONObject) obj;
-
-            JSONArray tmp = (JSONArray) jsonObject.get("fragments");
-            tmp.remove(0);
-//            System.out.println(tmp.toJSONString());
-            for (Object Movimiento: tmp)
+            Object obj = parser.parse(videoResponse.getContent()); // Creo un objeto con el Json (string) parseado.
+            JSONObject jsonObject = (JSONObject) obj;   // Casteo el objeto a un Objeto Json
+            String msg = (String) jsonObject.get("processingResult"); // Al objeto Json le pido la llave "processing..."
+            obj = parser.parse(msg); // Parseo el string (valor) que me deio la llave anterior.
+            jsonObject = (JSONObject) obj; // Lo Casteo
+            JSONArray tmp = (JSONArray) jsonObject.get("fragments"); // Le pido al Objeto Json "fragments"
+            tmp.remove(0);  // Le remuevo la posicion 0 pues este no es un objeto que se mueve
+            for (Object Movimiento: tmp) // Recorre la lista de movimientos que me da "fragments"
             {
-
-                jsonObject = (JSONObject) Movimiento;
-//                System.out.println(jsonObject.toJSONString());
-                if(jsonObject.containsKey("events"))
+                jsonObject = (JSONObject) Movimiento; // Casteo Movimiento a un Json object para pedir los eventos
+                if(jsonObject.containsKey("events")) // Le digo que si tiene la llave "events" entre al if
                 {
 
-                    JSONArray array = (JSONArray) jsonObject.get("events");
+                    JSONArray array = (JSONArray) jsonObject.get("events"); // Pido la llave "events" y csteo a array
 
-                    array = (JSONArray) array.get(0);
-                    jsonObject = (JSONObject) array.get(0);
-                    array = (JSONArray) jsonObject.get("locations");
-                    jsonObject = (JSONObject) array.get(0);
+                    array = (JSONArray) array.get(0); // Pido el sub cero del array que devuelve events (aqui empieza el mivimiento)
+                    jsonObject = (JSONObject) array.get(0); // Pido el sub cero de array (primr cuado donde detecta movimiento)
+                    array = (JSONArray) jsonObject.get("locations"); // Le pido locations
+                    jsonObject = (JSONObject) array.get(0); // Y tomo el sub cero (x y y)
+                    // los siguientes if son para determinar la hora del video que anliza
                     if(Hora < 3) {
                         Cuerpos.add(new Cuerpo((double) jsonObject.get("x"), (double) jsonObject.get("y"), 0));
                     }else if(Hora > 3 && Hora < 6 )
@@ -94,6 +87,7 @@ public class MSClient implements IConstants {
         {
             e.printStackTrace();
         }
+        System.out.println(Hora);
         Hora++;
     }
 }
